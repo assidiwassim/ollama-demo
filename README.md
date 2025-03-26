@@ -20,9 +20,35 @@ Clone this repository to your local machine using the following command:
 ``bash
 git clone https://github.com/assidiwassim/ollama-demo.git
 
+### 2. Navigate to the Project Directory
+Change into the project directory:
 
-### 1. Clone the Repository
+``bash
+cd ollama-demo
+
+### 3. Start the Docker Containers
+Use Docker Compose to start the services defined in the docker-compose.yml file. The -d flag will run the containers in detached mode:
+
+``bash
+docker compose up -d
+
+### 4. Verify the Containers are Running
+To verify that the containers are up and running, use the following command:
+
+``bash
+docker ps
+
+### 5. Access the Services
+To verify that the containers are up and running, use the following command:
+
+- The Ollama API is available at http://localhost:11434.
+
+- The Open WebUI is available at http://localhost:8080.
 
 
-### 1. Clone the Repository
+### 6. Stop the Containers
+If you want to stop the running containers, use the following command:
+
+``bash
+docker compose down
 

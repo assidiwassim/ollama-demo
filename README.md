@@ -17,25 +17,25 @@ Follow these steps to clone the repository and run the project using Docker:
 
 Clone this repository to your local machine using the following command:
 
-``bash
+````bash
 git clone https://github.com/assidiwassim/ollama-demo.git
 
 ### 2. Navigate to the Project Directory
 Change into the project directory:
 
-``bash
+```bash
 cd ollama-demo
 
 ### 3. Start the Docker Containers
 Use Docker Compose to start the services defined in the docker-compose.yml file. The -d flag will run the containers in detached mode:
 
-``bash
+```bash
 docker compose up -d
 
 ### 4. Verify the Containers are Running
 To verify that the containers are up and running, use the following command:
 
-``bash
+```bash
 docker ps
 
 ### 5. Access the Services
@@ -49,6 +49,6 @@ To verify that the containers are up and running, use the following command:
 ### 6. Stop the Containers
 If you want to stop the running containers, use the following command:
 
-``bash
+```bash
 docker compose down
 

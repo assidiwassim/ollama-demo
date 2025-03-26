@@ -1,39 +1,41 @@
-version: '3.8'
+version: '3.8'  # Specify the Docker Compose version
 
 services:
-  ollama:
-    image: ollama/ollama
-    container_name: ollama
-    restart: unless-stopped
+  ollama:  # Service for Ollama container
+    image: ollama/ollama  # Pull the Ollama image from Docker Hub
+    container_name: ollama  # Set the container name as "ollama"
+    restart: unless-stopped  # Restart the container unless it is manually stopped
     ports:
-      - "11434:11434"
+      - "11434:11434"  # Map port 11434 of the container to port 11434 on the host machine
     volumes:
-      - ollama-data:/root/.ollama
+      - ollama-data:/root/.ollama  # Mount the ollama-data volume to store Ollama data
     environment:
-      - OLLAMA_HOST=0.0.0.0
+      - OLLAMA_HOST=0.0.0.0  # Set the OLLAMA_HOST environment variable to allow external access
     networks:
-      - ollama-network
-    entrypoint: ["/bin/sh", "-c", "ollama serve & sleep 5 && ollama pull tinyllama:1.1b && wait"]
+      - ollama-network  # Connect the container to the "ollama-network"
+    entrypoint: ["/bin/sh", "-c", "ollama serve & sleep 5 && ollama pull tinyllama:1.1b && wait"]  # Start Ollama and pull the tinyllama model
 
-  open-webui:
-    image: ghcr.io/open-webui/open-webui:latest
-    container_name: open-webui
-    restart: unless-stopped
+  open-webui:  # Service for the Open WebUI container
+    image: ghcr.io/open-webui/open-webui:latest  # Pull the latest Open WebUI image from GitHub Container Registry
+    container_name: open-webui  # Set the container name as "open-webui"
+    restart: unless-stopped  # Restart the container unless it is manually stopped
     ports:
-      - "8080:8080"
+      - "8080:8080"  # Map port 8080 of the container to port 8080 on the host machine
     environment:
-      - OLLAMA_API_BASE_URL=http://ollama:11434
+      - OLLAMA_API_BASE_URL=http://ollama:11434  # Set the OLLAMA_API_BASE_URL to the Ollama service URL
     volumes:
-      - open-webui-data:/app/backend/data
+      - open-webui-data:/app/backend/data  # Mount the open-webui-data volume to persist Open WebUI data
     depends_on:
-      - ollama
+      - ollama  # Ensure the "ollama" service is started before this one
     networks:
-      - ollama-network
+      - ollama-network  # Connect the container to the "ollama-network"
 
+# Define named volumes to persist data
 volumes:
-  ollama-data:
-  open-webui-data:
+  ollama-data:  # Volume to store Ollama data
+  open-webui-data:  # Volume to store Open WebUI data
 
+# Define networks
 networks:
-  ollama-network:
-    driver: bridge
+  ollama-network:  # Define a custom network for inter-service communication
+    driver: bridge  # Use the bridge network driver for local communication between containers

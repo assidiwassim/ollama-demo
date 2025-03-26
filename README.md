@@ -17,7 +17,7 @@ Follow these steps to clone the repository and run the project using Docker:
 
 Clone this repository to your local machine using the following command:
 
-````bash
+```bash
 git clone https://github.com/assidiwassim/ollama-demo.git
 ```
 

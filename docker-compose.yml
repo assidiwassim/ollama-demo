@@ -13,6 +13,7 @@ services:
       - OLLAMA_HOST=0.0.0.0
     networks:
       - ollama-network
+    entrypoint: ["/bin/sh", "-c", "ollama serve & sleep 5 && ollama pull tinyllama:1.1b && wait"]
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:latest
@@ -22,10 +23,6 @@ services:
       - "8080:8080"
     environment:
       - OLLAMA_API_BASE_URL=http://ollama:11434
-      # Optional Admin Credentials:
-      # - ADMIN_USERNAME=admin
-      # - ADMIN_PASSWORD=admin
-      # - ADMIN_EMAIL=hello@lebondeveloppeur.com
     volumes:
       - open-webui-data:/app/backend/data
     depends_on:
